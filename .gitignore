@@ -1,0 +1,51 @@
+# User-specific files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+out/
+publish/
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Test results and code coverage
+TestResults/
+*.trx
+*.coverage
+coverage*.xml
+coverage/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.cache
+
+# Certificates and secrets (do NOT commit private keys or secrets)
+*.pfx
+secrets.json
+# If you keep local development settings out of source control, uncomment the next line
+# appsettings.*.Development.json
+.env
+
+# VS Code test helpers
+.vscode-test/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
