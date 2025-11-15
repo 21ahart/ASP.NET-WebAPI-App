@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mywebapi_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mywebapi_db
+      MYSQL_USER: apiuser
+      MYSQL_PASSWORD: apipassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - mywebapi_network
+
+volumes:
+  mysql_data:
+
+networks:
+  mywebapi_network:
