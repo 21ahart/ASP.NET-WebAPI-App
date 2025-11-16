@@ -1,6 +1,15 @@
 ﻿{
   "$schema": "https://json.schemastore.org/launchsettings.json",
-  "profiles": {
+  "profiles": { //placing https first in profiles fixed issue where https port not recognized
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:7160",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
     "http": {
       "commandName": "Project",
       "dotnetRunMessages": true,
@@ -9,15 +18,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    "https": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": false,
-      "applicationUrl": "https://localhost:7160;http://localhost:5235",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
     }
+
   }
 }
