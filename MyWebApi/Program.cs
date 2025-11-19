@@ -16,6 +16,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var app = builder.Build();
 
+// Automatically apply pending EF Core migrations at startup
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var db = services.GetRequiredService<ApplicationDbContext>();
+    var logger = services.GetRequiredService<ILogger<Program>>();
+
+    db.Database.Migrate();
+    await DbSeeder.SeedAsync(db, logger);
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
