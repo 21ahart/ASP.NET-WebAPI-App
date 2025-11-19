@@ -1,11 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using MyWebApi.Data;
+using YamlDotNet.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi();
+
 //add controllers to handle requests
 builder.Services.AddControllers();
+//add NSwag/OpenAPI document generation
+builder.Services.AddOpenApiDocument(config =>
+{
+    config.Title = "MyWebApi - Students API";
+    config.Version = "v1";
+
+});
 
 //database config (use mysql via pomelo provider)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -18,7 +26,14 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    //serve swagger JSON
+    app.UseOpenApi();
+    //UI for our tests
+    app.UseSwaggerUi(Settings =>
+    {
+        Settings.Path = "/swagger";
+        Settings.DocumentPath = "/swagger/v1/swagger.json";
+    });
 }
 // use https for data security in transit
 app.UseHttpsRedirection();
