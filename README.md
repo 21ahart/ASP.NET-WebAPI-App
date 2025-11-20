@@ -1,12 +1,45 @@
 # ASP.NET-WebAPI-App
-Repo for contemporary programming final project.
 
-If running windows install docker desktop.
-If linux or mac make sure to have docker set up.
-Run DB with "docker-compose up -d"
-You may need to use "dotnet ef database update"
-Ensure mysql is running and ready "docker ps"
-Ensure you are looking for the proper endpoint on the proper port using https (fixed error where https redirect failed), may need to trust certificate
-All required libraries and dependencies should be there. I had to ensure EF.Design was referenced in csproj
-There should be no need to run migrations initialcreate / add unless new db changes
-Feel free to make changes / additions / fixes as needed. 
+## Prerequisites (Windows)
+- Docker Desktop (running)
+- .NET SDK 8.0+ (check with: `dotnet --version`)
+- Git (optional if you already have the repo)
+
+## Quick Start (copy/paste into PowerShell)
+```powershell
+# 1) Go to the API project folder (compose file lives here)
+cd c:\Users\aiden\Documents\GitHub\ASP.NET-WebAPI-App\MyWebApi
+
+# 2) Start MySQL in Docker
+docker compose up -d
+
+# 3) Wait until MySQL is ready (Ctrl+C to stop tailing when you see 'ready for connections')
+docker logs -f mywebapi_mysql
+
+# 4) Trust HTTPS dev cert (one-time on your machine)
+dotnet dev-certs https --trust
+
+# 5) Restore, build, and run the API (HTTPS profile)
+dotnet restore
+dotnet build
+dotnet run --launch-profile https
+```
+
+The API will listen on:
+- HTTPS: https://localhost:7160
+- HTTP:  http://localhost:5235
+
+```bash
+# List first 5 students (use -k if you did not trust the cert)
+curl -k https://localhost:7160/api/students
+
+# Get a specific student by id
+curl -k https://localhost:7160/api/students/1
+```
+
+## Resetting the Database (fresh seed)
+```powershell
+cd c:\Users\aiden\Documents\GitHub\ASP.NET-WebAPI-App\MyWebApi
+docker compose down -v   # removes the volume (all data)
+docker compose up -d
+# run the API again; migrations + seed will rerun
