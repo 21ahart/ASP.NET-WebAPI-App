@@ -12,12 +12,18 @@ namespace MyWebApi.Data
         }
 
         public DbSet<Student> Students { get; set; }
+        public DbSet<Hobby> Hobbies { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<BreakfastFood> BreakfastFoods { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Student>().ToTable("Students");
+            modelBuilder.Entity<Hobby>().ToTable("Hobbies");
+            modelBuilder.Entity<Book>().ToTable("Books");
+            modelBuilder.Entity<BreakfastFood>().ToTable("BreakfastFoods");
         }
 
         public async Task<Student?> RemoveStudentById(int id)
