@@ -29,6 +29,10 @@ The API will listen on:
 - HTTPS: https://localhost:7160
 - HTTP:  http://localhost:5235
 
+Use Swagger UI for Web interface
+ - HTTPS: https://localhost:7160/swagger
+ - HTTP: https://localhost:5235/swagger
+
 ```bash
 # List first 5 students (use -k if you did not trust the cert)
 curl -k https://localhost:7160/api/students
